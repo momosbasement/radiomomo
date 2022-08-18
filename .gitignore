@@ -1,0 +1,12 @@
+bin/
+db
+tmp/
+.DS_Store
+.env
+music/
+web/public/
+web/static/img/cover/*
+
+# node
+node_modules
+package*

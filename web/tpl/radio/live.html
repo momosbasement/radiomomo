@@ -1,0 +1,32 @@
+{{define "content"}}
+<!-- Controls -->
+<div class="controlsOuter">
+  <div class="controlsInner">
+    <div id="loading"></div>
+    <div class="btn" id="playBtn"></div>
+    <div class="btn" id="pauseBtn"></div>
+  </div>
+  <div class="btn" id="volumeBtn"></div>
+</div>
+
+<!-- Progress -->
+<div id="waveform"></div>
+<div id="bar"></div>
+<div id="progress"></div>
+
+
+
+<!-- Volume -->
+<div id="volume" class="fadeout">
+  <div id="barFull" class="bar"></div>
+  <div id="barEmpty" class="bar"></div>
+  <div id="sliderBtn"></div>
+</div>
+<div id="particles-js"></div>
+
+<script src="/web/static/js/particles.min.js"></script>
+<script src="/web/static/js/siriwave.umd.min.js"></script>
+<script src="/web/static/js/howler.js"></script>
+<script src="/web/static/js/waveform.js"></script>
+<script src="/web/static/js/radio.js"></script>
+{{end}}

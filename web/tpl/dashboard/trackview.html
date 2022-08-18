@@ -1,0 +1,85 @@
+{{define "content"}}
+<div class="card shadow-lg mx-4 card-profile-bottom"></div>
+<script>
+  "use strict";
+
+  // Create an instance
+  let wavesurfer = {};
+
+  // Init & load audio file
+  document.addEventListener("DOMContentLoaded", function () {
+    var wavesurfer = WaveSurfer.create({
+      container: "#waveform",
+      waveColor: "violet",
+      progressColor: "purple",
+      barWidth: 2,
+      barHeight: 1,
+    });
+
+    wavesurfer.on("error", function (e) {
+      console.warn(e);
+    });
+
+    // Load audio from URL
+    wavesurfer.load("http://localhost:8080/api/track/play/{{.ID}}");
+
+    // Play button
+    const button = document.querySelector('[data-action="play"]');
+
+    button.addEventListener("click", wavesurfer.playPause.bind(wavesurfer));
+  });
+</script>
+<div class="container-fluid py-1">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-3">
+          <div class="card bg-transparent shadow-xl">
+            <div class="overflow-hidden position-relative border-radius-xl">
+              <span class="mask bg-gradient-dark"></span>
+              <div class="card-body position-relative z-index-1 p-2">
+                <img class="img-fluid rounded mx-auto d-block" src="/api/track/cover/{{.ID}}" stye="'height:240px" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="card">
+            <div class="card-header pb-3">
+              <button class="btn btn-primary" data-action="play">
+                <i class="glyphicon glyphicon-play"></i>
+                Play /
+                <i class="glyphicon glyphicon-pause"></i>
+                Pause
+              </button>
+              <h6>{{.Name}}</h6>
+              <p class="text-xs text-secondary mb-0">{{.Artist}}</p>
+            </div>
+            <div class="card-body pt-0 p-3 text-center">
+              <div style="margin: 1em" id="waveform"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--
+  <div class="container-fluid py-4">
+    <div class="row">
+      <div class="col-12">
+        <div class="card mb-4">
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <div class="text-center">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+-->
+  <script src="https://unpkg.com/wavesurfer.js@6.2.0/dist/wavesurfer.min.js"></script>
+  <script src="https://unpkg.com/wavesurfer.js@6.2.0/dist/plugin/wavesurfer.cursor.js"></script>
+  {{end}}
+</div>
