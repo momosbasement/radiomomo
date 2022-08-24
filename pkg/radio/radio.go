@@ -23,7 +23,7 @@ type Radio struct {
 	Uptime     int64
 	Buffer     []byte
 	TrackOnAir string
-	Playlists  []string
+	Playlist   []model.Track
 	db         *gorm.DB
 }
 
@@ -51,6 +51,7 @@ func (r *Radio) GetDatabase() *gorm.DB {
 func (r *Radio) GeneratePlaylist() {
 	var tracks []model.Track
 	r.db.Find(&tracks)
+	r.Playlists
 }
 
 // Return a random track
