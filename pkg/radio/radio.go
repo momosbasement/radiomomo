@@ -47,6 +47,12 @@ func (r *Radio) GetDatabase() *gorm.DB {
 	return r.db
 }
 
+// Generate a playlist
+func (r *Radio) GeneratePlaylist() {
+	var tracks []model.Track
+	r.db.Find(&tracks)
+}
+
 // Return a random track
 func (r *Radio) getRandomTrack() string {
 	return r.Playlists[rand.Intn(len(r.Playlists))]
