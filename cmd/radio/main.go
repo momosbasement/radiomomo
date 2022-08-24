@@ -19,14 +19,13 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+	//DB
+	conn := new(database.Connection)
+	conn.Init(os.Getenv("RADIO_DB_DSN"))
 	// RADIO
 	radio := new(radio.Radio)
 	port, _ := strconv.Atoi(os.Getenv("RADIO_PORT"))
 	radio.Init(port, os.Getenv("RADIO_MUSIC_DIR"))
-	go radio.PlayRadio()
-	//DB
-	conn := new(database.Connection)
-	conn.Init(os.Getenv("RADIO_DB_DSN"))
 	radio.SetDatabase(conn.GetConnection())
 	radio.GeneratePlaylist()
 	//HANDLER

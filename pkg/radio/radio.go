@@ -50,6 +50,7 @@ func (r *Radio) GeneratePlaylist() {
 	var tracks []model.Track
 	r.db.Find(&tracks)
 	r.Playlist = tracks
+	log.Info("Generate playlist with ", len(r.Playlist), " items")
 }
 
 // Return a random track
