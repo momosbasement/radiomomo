@@ -27,6 +27,7 @@ type Radio struct {
 	db         *gorm.DB
 }
 
+// Constructor
 func (r *Radio) Init(port int, folder string) {
 	rand.Seed(time.Now().UnixNano())
 	r.Port = port
@@ -36,14 +37,17 @@ func (r *Radio) Init(port int, folder string) {
 	r.Playlists, _ = file.FilePathWalkDir(r.Folder)
 }
 
+// Set the database connection
 func (r *Radio) SetDatabase(d *gorm.DB) {
 	r.db = d
 }
 
+// Return the database connection
 func (r *Radio) GetDatabase() *gorm.DB {
 	return r.db
 }
 
+// Return a random track
 func (r *Radio) getRandomTrack() string {
 	return r.Playlists[rand.Intn(len(r.Playlists))]
 }
@@ -70,6 +74,7 @@ func (r *Radio) getSeekPosition() int64 {
 
 // it's just an alias
 func (r *Radio) Next() {
+
 	r.setRandomTrack()
 }
 
