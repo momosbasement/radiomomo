@@ -12,7 +12,6 @@ import (
 
 	"github.com/gorilla/mux"
 	model "github.com/momosbasement/radiomomo/pkg/models"
-	file "github.com/momosbasement/radiomomo/pkg/utils"
 	"gorm.io/gorm"
 )
 
@@ -34,7 +33,6 @@ func (r *Radio) Init(port int, folder string) {
 	r.Folder = folder
 	r.Seek = 0
 	r.TrackOnAir = ""
-	r.Playlists, _ = file.FilePathWalkDir(r.Folder)
 }
 
 // Set the database connection
@@ -51,17 +49,17 @@ func (r *Radio) GetDatabase() *gorm.DB {
 func (r *Radio) GeneratePlaylist() {
 	var tracks []model.Track
 	r.db.Find(&tracks)
-	r.Playlists
+	r.Playlist = tracks
 }
 
 // Return a random track
 func (r *Radio) getRandomTrack() string {
-	return r.Playlists[rand.Intn(len(r.Playlists))]
+	return r.Playlist[rand.Intn(len(r.Playlist))].MP3File
 }
 
 func (r *Radio) setRandomTrack() {
 	r.Seek = 0
-	r.TrackOnAir = r.Playlists[rand.Intn(len(r.Playlists))]
+	r.TrackOnAir = r.Playlist[rand.Intn(len(r.Playlist))].MP3File
 	log.Info("Setting new track ", r.TrackOnAir)
 }
 

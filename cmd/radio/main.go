@@ -28,6 +28,7 @@ func main() {
 	conn := new(database.Connection)
 	conn.Init(os.Getenv("RADIO_DB_DSN"))
 	radio.SetDatabase(conn.GetConnection())
+	radio.GeneratePlaylist()
 	//HANDLER
 	http.HandleRequests(radio)
 }
